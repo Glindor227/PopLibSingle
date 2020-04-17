@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">PopLibSingle</string>
-    <string name="btn1_title">Начать</string>
+    <string name="btn1_title">Спам</string>
     <string name="text1">Hello World!</string>
+    <string name="btn_sub">Подписаться</string>
+    <string name="btn_unsub">Отписаться</string>
 </resources>

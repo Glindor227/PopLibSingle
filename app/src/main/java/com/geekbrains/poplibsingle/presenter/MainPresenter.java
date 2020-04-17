@@ -13,6 +13,7 @@ public class MainPresenter<T> {
     }
 
     public void presenterGo(T obj){
+        //test
         model.setObj(obj);
         view.callbackGo(model.getObj());
     }

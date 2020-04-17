@@ -17,22 +17,23 @@ public class MainActivity extends AppCompatActivity implements MainView<String>{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initUserView();
         initMVP();
+        initUserView();
+//        presenter.presenterGo("Новый текст");
 
     }
 
     private void initMVP() {
         presenter = new MainPresenter<>(this);
-        presenter.presenterGo("Новый текст");
     }
 
     private void initUserView() {
         textView1 = findViewById(R.id.text1);
+        findViewById(R.id.btn_begin).setOnClickListener(view -> presenter.presenterGo("LessonX_X"));
     }
 
     @Override
     public void callbackGo(String o) {
-        textView1.setText(o);
+//        textView1.setText(o);
     }
 }

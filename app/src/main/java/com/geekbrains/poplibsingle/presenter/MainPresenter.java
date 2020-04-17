@@ -9,7 +9,7 @@ public class MainPresenter<T> {
 
     public MainPresenter(MainView<T> view) {
         this.view = view;
-        model = new MainModel<T>();
+        model = new MainModel<>();
     }
 
     public void presenterGo(T obj){

@@ -6,12 +6,6 @@
     android:orientation="vertical"
     tools:context=".view.MainActivity">
 
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/text1"/>
     <Button
         android:id="@+id/btn_begin"
         android:layout_width="wrap_content"
@@ -24,5 +18,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/end_title"/>
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/text1"/>
 
 </LinearLayout>

@@ -5,8 +5,6 @@ import android.util.Log;
 import com.geekbrains.poplibsingle.model.MainModel;
 import com.geekbrains.poplibsingle.view.MainView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -21,7 +19,7 @@ public class MainPresenter<T> {
     private MainModel<T> model;
     private MainView<T> view;
     private Observable<String> observable;
-    private List<Disposable> disposable;
+    private Disposable disposable;
 
     public MainPresenter(MainView<T> view) {
         this.view = view;
@@ -29,7 +27,6 @@ public class MainPresenter<T> {
     }
 
     public void presenterGo(T obj){
-        disposable = new ArrayList<>();
         observable = Observable.create((ObservableOnSubscribe<String>) emitter -> {
             int num = 0;
             try {
@@ -53,12 +50,12 @@ public class MainPresenter<T> {
 //        view.callbackGo(model.getObj());
     }
     public void presenterSubscribe(){
-
-        observable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<String>() {
+        if(disposable==null)
+        observable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<String>() {//TODO как свернуть в лямбду
             @Override
             public void onSubscribe(Disposable d) {
                 toLog("подписались");
-                disposable.add(d);
+                disposable = d;
             }
 
             @Override
@@ -80,11 +77,8 @@ public class MainPresenter<T> {
         });
     }
     public void presenterUnSubscribe(){
-        if (!disposable.isEmpty()){
-            Disposable dis = disposable.get(disposable.size()-1);
-            disposable.remove(dis);
-            dis.dispose();
-        }
+        if(disposable!=null)
+            disposable.dispose();
     }
 
     private void toLog(String s){

@@ -47,4 +47,13 @@ dependencies {
     implementation "com.github.moxy-community:moxy-android:2.1.2"
     implementation "com.github.moxy-community:moxy-app-compat:2.1.2"
     implementation "com.github.moxy-community:moxy-material:2.1.2"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

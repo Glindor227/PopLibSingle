@@ -3,10 +3,12 @@ package com.geekbrains.poplibsingle.view;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.geekbrains.poplibsingle.R;
 import com.geekbrains.poplibsingle.presenter.MainPresenter;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +24,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView<Strin
     @BindView(R.id.et_input)
     EditText et_input;
 
+    @BindView(R.id.img_out)
+    ImageView imageView;
+
     @InjectPresenter
     MainPresenter<String> presenter;
 
@@ -30,12 +35,14 @@ public class MainActivity extends MvpAppCompatActivity implements MainView<Strin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
     }
 
     @Override
     public void callbackGo(String o) {
         textView1.setText(o);
+        Picasso.get()
+                .load(o)
+                .into(imageView);
     }
 
     @OnClick(R.id.btn_begin)

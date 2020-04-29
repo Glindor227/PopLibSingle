@@ -5,6 +5,7 @@ import android.util.Log;
 import com.geekbrains.poplibsingle.model.GsonDate;
 import com.geekbrains.poplibsingle.model.retrofit.GitHubApi;
 import com.geekbrains.poplibsingle.view.MainView;
+import com.geekbrains.poplibsingle.view.MainViewState;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,11 +31,11 @@ public class MainPresenter<Tin> extends MvpPresenter<MainView> {
         disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(
                 s -> {
                     toLog(s.avatar_url);
-                    getViewState().callbackGo(s.avatar_url);
+                    getViewState().callbackGo(new MainViewState(s.avatar_url,true));
                 },
                 e -> {
                     toLog("Ошибка:"+e.getMessage());
-                    getViewState().callbackGo(e.getMessage());
+                    getViewState().callbackGo(new MainViewState(e.getMessage(),false));
                 });
     }
 

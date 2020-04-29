@@ -38,11 +38,15 @@ public class MainActivity extends MvpAppCompatActivity implements MainView<Strin
     }
 
     @Override
-    public void callbackGo(String o) {
-        textView1.setText(o);
-        Picasso.get()
-                .load(o)
+    public void callbackGo(MainViewState<String> o) {
+
+        textView1.setText(o.getResult());
+        if(o.getOk())
+            Picasso.get()
+                .load(o.getResult())
                 .into(imageView);
+        else
+            imageView.setImageResource(R.drawable.error);
     }
 
     @OnClick(R.id.btn_begin)

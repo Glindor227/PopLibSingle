@@ -23,14 +23,13 @@ public class MainActivity extends MvpAppCompatActivity implements MainView<Strin
     EditText et_input;
 
     @InjectPresenter
-    MainPresenter<String,String> presenter;
+    MainPresenter<String> presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        presenter.presenterGo(et_input.getText().toString());
 
     }
 
@@ -41,7 +40,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView<Strin
 
     @OnClick(R.id.btn_begin)
     public void onClickButtonSubscribe(View view){
-        presenter.presenterSubscribe();
+        presenter.presenterSubscribe(et_input.getText().toString());
     }
     @OnClick(R.id.btn_end)
     public void onClickButtonUnSubscribe(View view){

@@ -6,7 +6,7 @@ import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface GitHubApiService {
+interface GitHubApiService {
     @GET("/users/{user}")
     Single<GsonDate> getAvatarUrl(@Path("user") String user);
 }

@@ -13,10 +13,8 @@ import io.reactivex.disposables.Disposable;
 import moxy.MvpPresenter;
 
 public class MainPresenter<Tin> extends MvpPresenter<MainView> {
-//    private MainModel<Tin, GsonDate> model;
-    private Single<GsonDate> single;
     private Disposable disposable;
-    private GitHubApi gitHubApi;
+    private final GitHubApi gitHubApi;
 
     public MainPresenter() {
 //        model = new MainModel<>();
@@ -26,7 +24,8 @@ public class MainPresenter<Tin> extends MvpPresenter<MainView> {
     public void presenterSubscribe(Tin obj){
         if(disposable!=null && !disposable.isDisposed())
             return;
-        single = gitHubApi.requestAvatarFromName((String) obj);
+        //    private MainModel<Tin, GsonDate> model;
+        Single<GsonDate> single = gitHubApi.requestAvatarFromName((String) obj);
 
         disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(
                 s -> {

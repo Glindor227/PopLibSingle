@@ -1,19 +1,19 @@
 package com.geekbrains.poplibsingle.view;
 
 public class MainViewState<T>{
-    T result;
-    Boolean ok;
+    final private T result;
+    final private Boolean ok;
 
     public MainViewState(T result, Boolean ok) {
         this.result = result;
         this.ok = ok;
     }
 
-    public T getResult() {
+    T getResult() {
         return result;
     }
 
-    public Boolean getOk() {
+    Boolean getOk() {
         return ok;
     }
 }

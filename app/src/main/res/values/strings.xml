@@ -3,4 +3,5 @@
     <string name="btn1_title">Начать</string>
     <string name="text1">Hello World!</string>
     <string name="end_title">Закончить</string>
+    <string name="str_input_init">Text</string>
 </resources>

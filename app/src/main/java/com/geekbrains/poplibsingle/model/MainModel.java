@@ -4,20 +4,20 @@ import io.reactivex.Single;
 import io.reactivex.SingleOnSubscribe;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainModel<T> {
-    private T obj = null;
+public class MainModel<Tin,Tout> {
+    private Object obj = null;
 
-    public T getObj() {
-        return obj;
+    public Tout getObj() {
+        return (Tout) obj;
     }
 
-    public void setObj(T obj) {
+    public void setObj(Tin obj) {
         this.obj = obj;
     }
 
-    public Single<T> modelRXGo(){
-        return Single.create((SingleOnSubscribe<T>) emitter -> {
-            emitter.onSuccess((T) "Единственное сообщение");
+    public Single<Tout> modelRXGo(){
+        return Single.create((SingleOnSubscribe<Tout>) emitter -> {
+            emitter.onSuccess((Tout) "Единственное сообщение");
         }).subscribeOn(Schedulers.io());
     }
 

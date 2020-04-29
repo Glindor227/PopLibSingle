@@ -8,28 +8,27 @@ import com.geekbrains.poplibsingle.view.MainView;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import moxy.MvpPresenter;
 
-public class MainPresenter<T> {
-    private MainModel<T> model;
-    private MainView<T> view;
-    private Single<String> observable;
+public class MainPresenter<Tin,Tout> extends MvpPresenter<MainView> {
+    private MainModel<Tin,Tout> model;
+    private Single<Tout> single;
     private Disposable disposable;
 
-    public MainPresenter(MainView<T> view) {
-        this.view = view;
+    public MainPresenter() {
         model = new MainModel<>();
         model.modelRXGo();
     }
 
-    public void presenterGo(T obj){
-        observable = (Single<String>) model.modelRXGo();
+    public void presenterGo(Tin obj){
+        single = model.modelRXGo();
     }
 
     public void presenterSubscribe(){
         if(disposable!=null && !disposable.isDisposed())
             return;
-        disposable = observable.observeOn(AndroidSchedulers.mainThread()).subscribe(
-                s -> view.callbackGo((T) s),
+        disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(
+                s -> getViewState().callbackGo(s),
                 e -> toLog("Ошибка:"+e.getMessage()));
     }
 

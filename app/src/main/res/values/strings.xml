@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">PopLibSingle</string>
-    <string name="btn1_title">Начать</string>
+    <string name="btn1_title">Добавить один User</string>
     <string name="text1">Hello World!</string>
-    <string name="end_title">Закончить</string>
+    <string name="end_title">Добавить несколько User</string>
     <string name="str_input_init">Text</string>
+    <string name="btn_3_title">Обновить User</string>
+    <string name="btn_4_title">Удалить User</string>
+    <string name="btn_5_title">Результат</string>
 </resources>

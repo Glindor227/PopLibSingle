@@ -1,9 +1,13 @@
 package com.geekbrains.poplibsingle.presenter;
 
+import android.os.Build;
 import android.util.Log;
 
-import com.geekbrains.poplibsingle.model.GsonDate;
-import com.geekbrains.poplibsingle.model.retrofit.GitHubApi;
+import androidx.annotation.RequiresApi;
+
+import com.geekbrains.poplibsingle.model.retrofit.RetrofitApi;
+import com.geekbrains.poplibsingle.model.retrofit.date.ConfigFile;
+import com.geekbrains.poplibsingle.model.retrofit.date.GsonDate;
 import com.geekbrains.poplibsingle.view.MainView;
 
 import io.reactivex.Single;
@@ -14,23 +18,25 @@ import moxy.MvpPresenter;
 public class MainPresenter<Tin> extends MvpPresenter<MainView> {
 //    private MainModel<Tin, GsonDate> model;
     private Single<GsonDate> single;
+    private Single<ConfigFile> oneFile;
     private Disposable disposable;
-    private GitHubApi gitHubApi;
+    private RetrofitApi myApi;
 
     public MainPresenter() {
-//        model = new MainModel<>();
-        gitHubApi = new GitHubApi();
+        myApi = new RetrofitApi();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void presenterSubscribe(Tin obj){
         if(disposable!=null && !disposable.isDisposed())
             return;
-        single = gitHubApi.requestAvatarFromName((String) obj);
+//        single = myApi.requestFilesList();
+        oneFile = myApi.requestFileByName("tessss");
 
-        disposable = single.observeOn(AndroidSchedulers.mainThread()).subscribe(
+        disposable = oneFile.observeOn(AndroidSchedulers.mainThread()).subscribe(
                 s -> {
-                    toLog(s.avatar_url);
-                    getViewState().callbackGo(s.avatar_url);
+                    getViewState().callbackGo(s.name+" "+s.size);
+                    getViewState().callbackImage(s.file);
                 },
                 e -> {
                     toLog("Ошибка:"+e.getMessage());

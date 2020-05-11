@@ -1,5 +1,6 @@
 package com.geekbrains.poplibsingle.model;
 
+import com.geekbrains.poplibsingle.model.retrofit.date.GsonDate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

@@ -1,6 +1,7 @@
 package com.geekbrains.poplibsingle.model.retrofit;
 
-import com.geekbrains.poplibsingle.model.GsonDate;
+import com.geekbrains.poplibsingle.model.retrofit.date.ConfigFile;
+import com.geekbrains.poplibsingle.model.retrofit.date.GsonDate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,18 +11,24 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GitHubApi {
-    public Single<GsonDate> requestAvatarFromName(String name){
+public class RetrofitApi {
+    public Single<GsonDate> requestFilesList(){
+        return initApi().getFileList().subscribeOn(Schedulers.io());
+    }
+    public Single<ConfigFile> requestFileByName(String name){
+        return initApi().getFile(name).subscribeOn(Schedulers.io());
+    }
+
+    private RetrofitApiService initApi() {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create(gson);
-        GitHubApiService api = new Retrofit.Builder()
-                .baseUrl("https://api.github.com")
+        return new Retrofit.Builder()
+                .baseUrl("http://192.168.1.65:8001")
+//                .baseUrl("https://api.github.com")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(gsonConverterFactory)
                 .build()
-                .create(GitHubApiService.class);
-        return api.getAvatarUrl(name).subscribeOn(Schedulers.io());
-
-
+                .create(RetrofitApiService.class);
     }
+
 }

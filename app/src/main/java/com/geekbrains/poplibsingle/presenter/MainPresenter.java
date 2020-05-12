@@ -17,11 +17,10 @@ public class MainPresenter<Tin,Tout> extends MvpPresenter<MainView> {
 
     public MainPresenter() {
         model = new MainModel<>();
-        model.modelRXGo();
+        single =model.modelRXGo();
     }
 
-    public void presenterGo(Tin obj){
-        single = model.modelRXGo();
+    public void sendToPresenter(Tin obj){
     }
 
     public void presenterSubscribe(){

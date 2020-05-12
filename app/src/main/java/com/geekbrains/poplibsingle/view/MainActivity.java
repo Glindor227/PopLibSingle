@@ -30,7 +30,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView<Strin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        presenter.presenterGo(et_input.getText().toString());
+        presenter.sendToPresenter(et_input.getText().toString());
 
     }
 
